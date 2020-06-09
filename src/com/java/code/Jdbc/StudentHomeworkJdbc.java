@@ -1,9 +1,6 @@
 package com.java.code.Jdbc;
 
-import com.java.code.Model.Company;
-import com.java.code.Model.Homework;
-import com.java.code.Model.Student;
-import com.java.code.Model.StudentHomework;
+import com.java.code.Model.*;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -179,6 +176,216 @@ public class StudentHomeworkJdbc {
             try {
                 con.close();
             } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public static boolean addNotice(Notice notice){
+
+        try {
+            Class.forName(driverName);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        String sqlString = "insert into notice (title,content,sendtime,sender) values(?,?,?,?)";
+
+        int resultSet = 0;
+        try (Connection connection = DriverManager.getConnection(url, "root", "123456")) {
+            try (PreparedStatement ps = connection.prepareStatement(sqlString)) {
+                ps.setString(1,notice.getTitle());
+                ps.setString(2,notice.getContent());
+                ps.setString(3,notice.getSendtime());
+                ps.setString(4,notice.getSender());
+                resultSet = ps.executeUpdate();
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return resultSet > 0;
+    }
+
+    public static boolean addMeeting(Meeting meeting){
+
+        try {
+            Class.forName(driverName);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        String sqlString = "insert into meeting (title,content,address,sender,starttime,endtime) values(?,?,?,?,?,?)";
+
+        int resultSet = 0;
+        try (Connection connection = DriverManager.getConnection(url, "root", "123456")) {
+            try (PreparedStatement ps = connection.prepareStatement(sqlString)) {
+                ps.setString(1,meeting.getTitle());
+                ps.setString(2,meeting.getContent());
+                ps.setString(3,meeting.getAddress());
+                ps.setString(4,meeting.getSender());
+                ps.setString(5,meeting.getStarttime());
+                ps.setString(6,meeting.getEndtime());
+                resultSet = ps.executeUpdate();
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return resultSet > 0;
+    }
+
+    public static List<Notice> showNotice(){
+
+        try {
+            Class.forName(driverName);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        String sqlString = "SELECT * FROM notice";
+
+        List<Notice> list = new ArrayList<>();
+        try (Connection connection = DriverManager.getConnection(url, "root", "123456")) {
+            try (Statement statement = connection.createStatement()) {
+                try (ResultSet resultSet = statement.executeQuery(sqlString)) {
+                    //获取执行结果
+                    while (resultSet.next()) {
+                        Notice notice = new Notice();
+                        notice.setId(resultSet.getInt("id"));
+                        notice.setTitle(resultSet.getString("title"));
+                        notice.setContent(resultSet.getString("content"));
+                        notice.setSendtime(resultSet.getString("sendtime"));
+                        notice.setSender(resultSet.getString("sender"));
+                        list.add(notice);
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+        return list;
+    }
+
+    public static Meeting selectMeetingById(int id) {
+        Meeting meeting = new Meeting();
+        Connection con = null;
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
+        String url = "jdbc:mysql://localhost:3306/school?serverTimezone=UTC";
+        String user = "root";
+        String pwd = "123456";
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            con = DriverManager.getConnection(url,user,pwd);
+
+            String sql = "select * from meeting where id = ?";
+            pstm = con.prepareStatement(sql);
+            pstm.setInt(1,id);
+
+            rs = pstm.executeQuery();
+
+            while(rs.next()){
+                meeting.setTitle(rs.getString("title"));
+                meeting.setContent(rs.getString("content"));
+                meeting.setAddress(rs.getString("address"));
+                meeting.setSender(rs.getString("sender"));
+                meeting.setStarttime(rs.getString("starttime"));
+                meeting.setEndtime(rs.getString("endtime"));
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                rs.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            try {
+                pstm.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            try {
+                con.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return meeting;
+    }
+
+    public static void updateToNotice(Notice notice) {
+        Connection con = null;
+        PreparedStatement pstm = null;
+        String url = "jdbc:mysql://localhost:3306/school?serverTimezone=UTC";
+        String user = "root";
+        String pwd = "123456";
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            con = DriverManager.getConnection(url,user,pwd);
+
+            String sql = "update notice set title=?,content=?,sendtime=?,sender=? where id= ?" ;
+            pstm = con.prepareStatement(sql);
+            pstm.setString(1,notice.getTitle());
+            pstm.setString(2,notice.getContent());
+            pstm.setString(3,notice.getSendtime());
+            pstm.setString(4,notice.getSender());
+            pstm.setInt(5,notice.getId());
+
+            pstm.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                pstm.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            try {
+                con.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public static void DeleteNotice(int id) {
+        Connection con=null;
+        PreparedStatement pstmt=null;
+
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+
+            String url="jdbc:mysql://localhost:3306/school?serverTimezone=UTC";
+            String user="root";
+            String password="123456";
+            con=DriverManager.getConnection(url, user, password);
+
+            String sql="delete from notice where id=?";
+            pstmt=con.prepareStatement(sql);
+            pstmt.setInt(1, id);
+
+            int result=pstmt.executeUpdate();
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }finally {
+            try {
+                pstmt.close();
+            } catch (SQLException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+            try {
+                con.close();
+            } catch (SQLException e) {
+                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
         }

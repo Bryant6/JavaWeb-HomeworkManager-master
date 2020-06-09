@@ -15,51 +15,37 @@
 <%
     String type = (String)request.getAttribute("type");
     boolean isOK = (boolean)request.getAttribute("isOK");
-    if (type.equals("addHomework")){
+    if (type.equals("addNotice")){
 
         if (isOK){
 %>
 
-<p style="margin: 50px; font-family: '华文宋体'; font-size: 50px; color: darkorange; text-align: center;"><%="添加作业成功!"%></p>
+<p style="margin: 50px; font-family: '华文宋体'; font-size: 50px; color: darkorange; text-align: center;"><%="添加公告成功!"%></p>
 
 <%
 }else{
 %>
 
-<p style="margin: 50px; font-family: '华文宋体'; font-size: 50px; color: darkorange; text-align: center;"><%="添加作业失败!!!"%></p>
+<p style="margin: 50px; font-family: '华文宋体'; font-size: 50px; color: darkorange; text-align: center;"><%="添加公告失败!!!"%></p>
 
 <%
     }
-}else if (type.equals("addStudent")){
+}else if (type.equals("addMeeting")){
     if (isOK){
 %>
 
-<p style="margin: 50px; font-family: '华文宋体'; font-size: 50px; color: darkorange; text-align: center;"><%="添加学生成功!"%></p>
+<p style="margin: 50px; font-family: '华文宋体'; font-size: 50px; color: darkorange; text-align: center;"><%="添加会议成功!"%></p>
 
 <%
 }else{
 %>
 
-<p style="margin: 50px; font-family: '华文宋体'; font-size: 50px; color: darkorange; text-align: center;"><%="已有学生信息!无法添加!"%></p>
-
-<%
-    }
-}else if (type.equals("addStudentHomework")){
-    if (isOK){
-%>
-
-<p style="margin: 50px; font-family: '华文宋体'; font-size: 50px; color: darkorange; text-align: center;"><%="作业提交成功!"%></p>
-
-<%
-}else {
-%>
-
-<p style="margin: 50px; font-family: '华文宋体'; font-size: 50px; color: darkorange; text-align: center;"><%="作业提交失败!"%></p>
+<p style="margin: 50px; font-family: '华文宋体'; font-size: 50px; color: darkorange; text-align: center;"><%="添加会议失败!"%></p>
 
 <%
         }
     }
 %>
-<h2 style="font-family: '华文宋体'; text-align: center; color: #112CEB;"><a href="index.jsp">返回首页</a></h2>
+<h2 style="font-family: '华文宋体'; text-align: center; color: #112CEB;"><a href="/jsp/manager.jsp">返回管理员操作页面</a></h2>
 </body>
 </html>

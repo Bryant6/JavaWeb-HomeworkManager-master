@@ -16,10 +16,10 @@
 <div style="margin-left: 50px; border: 7px solid #13C6EB;">
     <ul style="line-height: 40px; font-family: '华文宋体'; text-align: center;">
         <li><a href="${pageContext.request.contextPath}/showCompany">公司基本信息管理</a></li>
-        <li><a href="noticePub.jsp">发布公告</a></li>
-        <li><a href="noticeShow.jsp">查看所有公告</a></li>
-        <li><a href="meetingPub.jsp">发布会议</a></li>
-        <li><a href="meetingShow.jsp">查看会议安排</a></li>
+        <li><a href="/jsp/addNotice.jsp">发布公告</a></li>
+        <li><a href="${pageContext.request.contextPath}/showNotice">查看所有公告</a></li>
+        <li><a href="/jsp/addMeeting.jsp">发布会议</a></li>
+        <li><a href="${pageContext.request.contextPath}/showMeeting">查看会议安排</a></li>
     </ul>
 </div>
 
