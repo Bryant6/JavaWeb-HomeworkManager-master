@@ -8,9 +8,20 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>日常信息管理系统-员工</title>
 </head>
 <body>
-普通用户
+<h2 style="text-align: center; color: #2418DA; font-family: '仿宋';">欢迎你！</h2>
+<h2 style="text-align: center; color: #2418DA; font-family: '仿宋';">你可以干这些事情</h2>
+
+<div style="margin-left: 50px; border: 7px solid #13C6EB;">
+    <ul style="line-height: 40px; font-family: '华文宋体'; text-align: center;">
+        <li><a href="${pageContext.request.contextPath}/showCompanyNoUp">查看公司信息</a></li>
+        <li><a href="queryMyHomework.jsp">查看公告</a></li>
+        <li><a href="queryMyHomework.jsp">查看会议安排</a></li>
+    </ul>
+</div>
+
+<h2 style="font-family: '华文宋体'; text-align: center; color: #112CEB;"><a href="http://localhost:8080">返回首页</a></h2>
 </body>
 </html>

@@ -1,9 +1,13 @@
 package com.java.code.Model;
 
 public class User {
+    //用户ID
     private int id;
+    //用户名
     private String username;
+    //密码
     private String password;
+    //是否是管理员
     private int is_manager;
 
     public User() {

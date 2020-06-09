@@ -1,5 +1,6 @@
 package com.java.code.Jdbc;
 
+import com.java.code.Model.Company;
 import com.java.code.Model.Homework;
 import com.java.code.Model.Student;
 import com.java.code.Model.StudentHomework;
@@ -81,6 +82,90 @@ public class StudentHomeworkJdbc {
             pstm.setString(1,username);
             pstm.setString(2,password);
             pstm.setInt(3,is_manager);
+
+            pstm.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                pstm.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            try {
+                con.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public static Company selectCompany() {
+        Company company = new Company();
+        Connection con = null;
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
+        String url = "jdbc:mysql://localhost:3306/school?serverTimezone=UTC";
+        String user = "root";
+        String pwd = "123456";
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            con = DriverManager.getConnection(url,user,pwd);
+
+            String sql = "select * from company where id = 1";
+            pstm = con.prepareStatement(sql);
+
+            rs = pstm.executeQuery();
+
+            while(rs.next()){
+                company.setAddress(rs.getString("address"));
+                company.setName(rs.getString("name"));
+                company.setPhone(rs.getString("phone"));
+                company.setEmail(rs.getString("email"));
+                company.setNature(rs.getString("nature"));
+                company.setIntro(rs.getString("intro"));
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                rs.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            try {
+                pstm.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            try {
+                con.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return company;
+    }
+
+    public static void updateToCompany(Company company) {
+        Connection con = null;
+        PreparedStatement pstm = null;
+        String url = "jdbc:mysql://localhost:3306/school?serverTimezone=UTC";
+        String user = "root";
+        String pwd = "123456";
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            con = DriverManager.getConnection(url,user,pwd);
+
+            String sql = "update company set name=?,address=?,phone=?,email=?,nature=?,intro=? where id= 1" ;
+            pstm = con.prepareStatement(sql);
+            pstm.setString(1,company.getName());
+            pstm.setString(2,company.getAddress());
+            pstm.setString(3,company.getPhone());
+            pstm.setString(4,company.getEmail());
+            pstm.setString(5,company.getNature());
+            pstm.setString(6,company.getIntro());
 
             pstm.executeUpdate();
         } catch (Exception e) {

@@ -9,7 +9,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
   <head>
-    <title>作业管理系统</title>
+    <title>日常信息管理系统</title>
 
     <style>
       body{
