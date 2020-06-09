@@ -29,6 +29,7 @@ public class LoginServlet extends HttpServlet {
             req.getRequestDispatcher("/jsp/login.jsp").forward(req,resp);
         }else {
             if(StudentHomeworkJdbc.selectByUsernameAndPassword(username,password) == 0){
+                req.setAttribute("username",username);
                 req.getRequestDispatcher("/jsp/usualUser.jsp").forward(req,resp);
             }else{
                 req.getRequestDispatcher("/jsp/manager.jsp").forward(req,resp);

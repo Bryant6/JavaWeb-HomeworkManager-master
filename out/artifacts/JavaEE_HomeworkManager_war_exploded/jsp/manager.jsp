@@ -23,6 +23,6 @@
     </ul>
 </div>
 
-<h2 style="font-family: '华文宋体'; text-align: center; color: #112CEB;"><a href="http://localhost:8080/">返回首页</a></h2>
+<h2 style="font-family: '华文宋体'; text-align: center; color: #112CEB;"><a href="http://localhost:8080/">退出登录</a></h2>
 </body>
 </html>
