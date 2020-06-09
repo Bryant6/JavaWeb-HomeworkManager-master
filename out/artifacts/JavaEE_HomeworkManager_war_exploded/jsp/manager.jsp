@@ -19,7 +19,7 @@
         <li><a href="/jsp/addNotice.jsp">发布公告</a></li>
         <li><a href="${pageContext.request.contextPath}/showNotice">查看所有公告</a></li>
         <li><a href="/jsp/addMeeting.jsp">发布会议</a></li>
-        <li><a href="/jsp/meetingManage.jsp">查看会议安排</a></li>
+        <li><a href="${pageContext.request.contextPath}/showMeeting">查看会议安排</a></li>
     </ul>
 </div>
 

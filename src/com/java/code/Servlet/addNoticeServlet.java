@@ -1,7 +1,6 @@
 package com.java.code.Servlet;
 
 import com.java.code.Jdbc.StudentHomeworkJdbc;
-import com.java.code.Model.Homework;
 import com.java.code.Model.Notice;
 
 import javax.servlet.ServletException;
